@@ -1,9 +1,10 @@
-require("dotenv").config;
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 4000;
+const taskRouter = require("./routes/taskrouter");
 
 //middleware are functions that run on the server btw the req and res
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(cors());
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome To Task Duty API" });
 });
+app.use("/task", taskRouter);
 
 //Error Route : The error route will always be at the end of te app.get route so its wont run before other existing route
 
